@@ -8,8 +8,8 @@
 #define H_BORDER '-'
 #define V_BORDER '|'
 
-#define BLOCKS 10
 #define PLAYER 'X'
+#define BLOCKS 10
 
 int cursorX;
 int cursorY;
@@ -40,7 +40,7 @@ void drawBorders(){
 }
 
 void movePlayerUp(){
-	if (yPos > 0){
+	if (yPos > 0 && map[xPos + (yPos - 1) * WIDTH] == 0){
 		getyx(stdscr, cursorY, cursorX);
 		mvaddch(cursorY, cursorX - 1, block[0]);
 		mvaddch(cursorY - 1, cursorX - 1, PLAYER);
@@ -50,7 +50,7 @@ void movePlayerUp(){
 }
 
 void movePlayerDown(){
-	if (yPos < HEIGHT - 1){
+	if (yPos < HEIGHT - 1 && map[xPos + (yPos + 1) * WIDTH] == 0){
 		getyx(stdscr, cursorY, cursorX);
 		mvaddch(cursorY, cursorX - 1, block[0]);
 		mvaddch(cursorY + 1, cursorX - 1, PLAYER);
@@ -60,7 +60,7 @@ void movePlayerDown(){
 }
 
 void movePlayerLeft(){
-	if (xPos > 0) {
+	if (xPos > 0 && map[(xPos - 1) + yPos * WIDTH] == 0){
 		getyx(stdscr, cursorY, cursorX);
 		mvaddch(cursorY, cursorX - 1, block[0]);
 		mvaddch(cursorY, cursorX - 2, PLAYER);
@@ -70,7 +70,7 @@ void movePlayerLeft(){
 }
 
 void movePlayerRight(){
-	if (xPos < WIDTH - 1){
+	if (xPos < WIDTH - 1 && map[(xPos + 1) + yPos * WIDTH] == 0){
 		getyx(stdscr, cursorY, cursorX);
 		mvaddch(cursorY, cursorX - 1, block[0]);
 		mvaddch(cursorY, cursorX, PLAYER);
@@ -85,7 +85,7 @@ void placeBlockUp(){
 		mvaddch(cursorY - 1, cursorX - 1, block[heldBlock]);
 		move(cursorY, cursorX);
 
-		map[xPos + (yPos - 1) * 32] = heldBlock;
+		map[xPos + (yPos - 1) * WIDTH] = heldBlock;
 	}
 }
 
@@ -95,7 +95,7 @@ void placeBlockDown(){
 		mvaddch(cursorY + 1, cursorX - 1, block[heldBlock]);
 		move(cursorY, cursorX);
 
-		map[xPos + (yPos + 1) * 32] = heldBlock;
+		map[xPos + (yPos + 1) * WIDTH] = heldBlock;
 	}
 }
 
@@ -105,7 +105,7 @@ void placeBlockLeft(){
 		mvaddch(cursorY, cursorX - 2, block[heldBlock]);
 		move(cursorY, cursorX);
 
-		map[(xPos - 1) + yPos * 32] = heldBlock;
+		map[(xPos - 1) + yPos * WIDTH] = heldBlock;
 	}
 }
 
@@ -115,7 +115,7 @@ void placeBlockRight(){
 		mvaddch(cursorY, cursorX, block[heldBlock]);
 		move(cursorY, cursorX);
 
-		map[(xPos + 1) + yPos * 32] = heldBlock;
+		map[(xPos + 1) + yPos * WIDTH] = heldBlock;
 	}
 }
 
