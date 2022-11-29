@@ -6,11 +6,11 @@ An extremely small "suckless" 2D map building game in your terminal, which is hi
 
 Copyright 2022 Hayden
 
-This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
+> This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+>
+> This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+>
+> You should have received a copy of the GNU General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 ## Building
 
@@ -85,7 +85,7 @@ To apply a patch, **enter the following command like so**, replacing `name-of-pa
 patch -p1 < name-of-patch.diff
 ```
 
-If you would like to create a patch, then you will need a copy of the original source code, and your patched source code. To create a patch, **issue the following command like so**, replacing `original.c` with the name of the original source code file, `patched.c` with the name of the patched source code file, and `patch.diff` with the name of your patch file to be written to:
+If you would like to create a patch, then you will need a copy of the original source code, and your patched source code. To create a patch, **issue the following command like so**, replacing `original.c` with the name of the original source code file, `patched.c` with the name of your patched source code file, and `patch.diff` with the name of your patch file to be written to:
 
 ```sh
 diff -u original.c patched.c > patch.diff
