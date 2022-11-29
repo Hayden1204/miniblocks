@@ -1,3 +1,11 @@
+// This file is part of miniblocks.
+//
+// miniblocks is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+//
+// miniblocks is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License along with miniblocks. If not, see <https://www.gnu.org/licenses/>. 
+
 #include <stdlib.h>
 #include <ncurses.h>
 
@@ -9,7 +17,7 @@
 #define V_BORDER '|'
 
 #define PLAYER 'X'
-#define BLOCKS 10
+#define BLOCKS 12
 
 int cursorX;
 int cursorY;
@@ -18,7 +26,7 @@ char *map;
 int yPos = 0;
 int xPos = 0;
 char heldBlock = 1;
-char block[BLOCKS] = {' ', '#', '%', '*', '&', '+', '[', ']', '-', '='};
+char block[BLOCKS] = {' ', '#', '%', '*', '&', '+', '@', '[', ']', '~', '-', '='};
 
 void drawBorders(){
 	int a;
