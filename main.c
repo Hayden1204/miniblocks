@@ -62,7 +62,7 @@ void drawBorders(){
 void movePlayerUp(){
 	if (yPos > 0 && BLOCK_UP == 0){
 		getyx(stdscr, cursorY, cursorX);
-		mvaddch(cursorY, cursorX - 1, block[BLOCK_DOWN]);
+		mvaddch(cursorY, cursorX - 1, block[BLOCK_UP]);
 		mvaddch(cursorY - 1, cursorX - 1, PLAYER);
 		
 		yPos--;
@@ -72,7 +72,7 @@ void movePlayerUp(){
 void movePlayerDown(){
 	if (yPos < HEIGHT - 1 && BLOCK_DOWN == 0){
 		getyx(stdscr, cursorY, cursorX);
-		mvaddch(cursorY, cursorX - 1, block[BLOCK_UP]);
+		mvaddch(cursorY, cursorX - 1, block[BLOCK_DOWN]);
 		mvaddch(cursorY + 1, cursorX - 1, PLAYER);
 		
 		yPos++;
@@ -82,7 +82,7 @@ void movePlayerDown(){
 void movePlayerLeft(){
 	if (xPos > 0 && BLOCK_LEFT == 0){
 		getyx(stdscr, cursorY, cursorX);
-		mvaddch(cursorY, cursorX - 1, block[BLOCK_RIGHT]);
+		mvaddch(cursorY, cursorX - 1, block[BLOCK_LEFT]);
 		mvaddch(cursorY, cursorX - 2, PLAYER);
 		
 		xPos--;
@@ -92,7 +92,7 @@ void movePlayerLeft(){
 void movePlayerRight(){
 	if (xPos < WIDTH - 1 && BLOCK_RIGHT == 0){
 		getyx(stdscr, cursorY, cursorX);
-		mvaddch(cursorY, cursorX - 1, block[BLOCK_LEFT]);
+		mvaddch(cursorY, cursorX - 1, block[BLOCK_RIGHT]);
 		mvaddch(cursorY, cursorX, PLAYER);
 		
 		xPos++;
