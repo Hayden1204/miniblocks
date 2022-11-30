@@ -1,0 +1,80 @@
+miniblocks Copyright (C) 2022 Hayden
+
+This file is part of miniblocks.
+
+miniblocks is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free
+Software Foundation, either version 3 of the License, or (at your option)
+any later version.
+
+miniblocks is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+more details.
+
+You should have received a copy of the GNU General Public License along
+with miniblocks. If not, see <https://www.gnu.org/licenses/>.
+
+--- main.c	2022-11-30 21:41:13.235640088 +0000
++++ main.c	2022-11-30 22:03:00.444350187 +0000
+@@ -27,6 +27,11 @@
+ #define BLOCK_RIGHT map[(xPos + 1) + yPos * WIDTH]
+ #define BLOCK_STANDING map[xPos + yPos * WIDTH]
+ 
++#define PLACEBLOCK_UP (BLOCK_UP == 0) ? heldBlock : 0
++#define PLACEBLOCK_DOWN (BLOCK_DOWN == 0) ? heldBlock : 0
++#define PLACEBLOCK_LEFT (BLOCK_LEFT == 0) ? heldBlock : 0
++#define PLACEBLOCK_RIGHT (BLOCK_RIGHT == 0) ? heldBlock : 0
++
+ #define C_BORDER '#'
+ #define H_BORDER '-'
+ #define V_BORDER '|'
+@@ -105,40 +110,40 @@ void movePlayerRight(){
+ void placeBlockUp(){
+ 	if (yPos > 0){
+ 		getyx(stdscr, cursorY, cursorX);
+-		mvaddch(cursorY - 1, cursorX - 1, block[heldBlock]);
++		mvaddch(cursorY - 1, cursorX - 1, block[PLACEBLOCK_UP]);
+ 		move(cursorY, cursorX);
+ 
+-		BLOCK_UP = heldBlock;
++		BLOCK_UP = PLACEBLOCK_UP;
+ 	}
+ }
+ 
+ void placeBlockDown(){
+ 	if (yPos < HEIGHT - 1){
+ 		getyx(stdscr, cursorY, cursorX);
+-		mvaddch(cursorY + 1, cursorX - 1, block[heldBlock]);
++		mvaddch(cursorY + 1, cursorX - 1, block[PLACEBLOCK_DOWN]);
+ 		move(cursorY, cursorX);
+ 
+-		BLOCK_DOWN = heldBlock;
++		BLOCK_DOWN = PLACEBLOCK_DOWN;
+ 	}
+ }
+ 
+ void placeBlockLeft(){
+ 	if (xPos > 0){
+ 		getyx(stdscr, cursorY, cursorX);
+-		mvaddch(cursorY, cursorX - 2, block[heldBlock]);
++		mvaddch(cursorY, cursorX - 2, block[PLACEBLOCK_LEFT]);
+ 		move(cursorY, cursorX);
+ 
+-		BLOCK_LEFT = heldBlock;
++		BLOCK_LEFT = PLACEBLOCK_LEFT;
+ 	}
+ }
+ 
+ void placeBlockRight(){
+ 	if (xPos < WIDTH - 1){
+ 		getyx(stdscr, cursorY, cursorX);
+-		mvaddch(cursorY, cursorX, block[heldBlock]);
++		mvaddch(cursorY, cursorX, block[PLACEBLOCK_RIGHT]);
+ 		move(cursorY, cursorX);
+ 
+-		BLOCK_RIGHT = heldBlock;
++		BLOCK_RIGHT = PLACEBLOCK_RIGHT;
+ 	}
+ }
+ 
