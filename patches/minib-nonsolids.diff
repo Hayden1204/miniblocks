@@ -1,0 +1,65 @@
+Copyright 2022 Hayden
+
+This file is part of miniblocks.
+
+miniblocks is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free
+Software Foundation, either version 3 of the License, or (at your option)
+any later version.
+
+miniblocks is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+more details.
+
+You should have received a copy of the GNU General Public License along
+with miniblocks. If not, see <https://www.gnu.org/licenses/>. 
+
+--- main.c	2022-11-30 20:34:03.282565034 +0000
++++ main.c	2022-11-30 20:32:59.767880705 +0000
+@@ -25,6 +25,9 @@
+ #define BLOCK_RIGHT map[(xPos + 1) + yPos * WIDTH]
+ #define BLOCK_STANDING map[xPos + yPos * WIDTH]
+ 
++#define NONSOLID_ID_MIN 7
++#define NONSOLID_ID_MAX 11
++
+ #define C_BORDER '#'
+ #define H_BORDER '-'
+ #define V_BORDER '|'
+@@ -61,7 +64,7 @@ void drawBorders(){
+ }
+ 
+ void movePlayerUp(){
+-	if (yPos > 0 && BLOCK_UP == 0){
++	if (yPos > 0 && BLOCK_UP == 0 || BLOCK_UP >= NONSOLID_ID_MIN && BLOCK_UP <= NONSOLID_ID_MAX){
+ 		getyx(stdscr, cursorY, cursorX);
+ 		mvaddch(cursorY, cursorX - 1, block[BLOCK_STANDING]);
+ 		mvaddch(cursorY - 1, cursorX - 1, PLAYER);
+@@ -71,7 +74,7 @@ void movePlayerUp(){
+ }
+ 
+ void movePlayerDown(){
+-	if (yPos < HEIGHT - 1 && BLOCK_DOWN == 0){
++	if (yPos < HEIGHT - 1 && BLOCK_DOWN == 0 || BLOCK_DOWN >= NONSOLID_ID_MIN && BLOCK_DOWN <= NONSOLID_ID_MAX){
+ 		getyx(stdscr, cursorY, cursorX);
+ 		mvaddch(cursorY, cursorX - 1, block[BLOCK_STANDING]);
+ 		mvaddch(cursorY + 1, cursorX - 1, PLAYER);
+@@ -81,7 +84,7 @@ void movePlayerDown(){
+ }
+ 
+ void movePlayerLeft(){
+-	if (xPos > 0 && BLOCK_LEFT == 0){
++	if (xPos > 0 && BLOCK_LEFT == 0 || BLOCK_LEFT >= NONSOLID_ID_MIN && BLOCK_LEFT <= NONSOLID_ID_MAX){
+ 		getyx(stdscr, cursorY, cursorX);
+ 		mvaddch(cursorY, cursorX - 1, block[BLOCK_STANDING]);
+ 		mvaddch(cursorY, cursorX - 2, PLAYER);
+@@ -91,7 +94,7 @@ void movePlayerLeft(){
+ }
+ 
+ void movePlayerRight(){
+-	if (xPos < WIDTH - 1 && BLOCK_RIGHT == 0){
++	if (xPos < WIDTH - 1 && BLOCK_RIGHT == 0 || BLOCK_RIGHT >= NONSOLID_ID_MIN && BLOCK_RIGHT <= NONSOLID_ID_MAX){
+ 		getyx(stdscr, cursorY, cursorX);
+ 		mvaddch(cursorY, cursorX - 1, block[BLOCK_STANDING]);
+ 		mvaddch(cursorY, cursorX, PLAYER);
