@@ -1,4 +1,4 @@
-/* Copyright 2022 Hayden                                                       *
+/* miniblocks Copyright (C) 2022 Hayden                                        *
  *                                                                             *
  * This file is part of miniblocks.                                            *
  *                                                                             *
