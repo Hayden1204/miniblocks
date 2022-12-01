@@ -22,6 +22,9 @@
 #define WIDTH 32
 #define HEIGHT 16
 
+#define YPOS_SCR yPos + 4
+#define XPOS_SCR xPos + 1
+
 #define MEMORY WIDTH + (HEIGHT - 1) * WIDTH
 
 #define BLOCK_UP map[xPos + (yPos - 1) * WIDTH]
@@ -157,7 +160,7 @@ int main(){
 	mvprintw(0, 0, "miniblocks v0.1.0 by Hayden");
 
 	drawBorders();
-	mvaddch(yPos + 4, xPos + 1, PLAYER);
+	mvaddch(YPOS_SCR, XPOS_SCR, PLAYER);
 
 	while (1){
 		getyx(stdscr, cursorY, cursorX);
