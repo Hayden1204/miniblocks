@@ -45,21 +45,21 @@ char heldBlock = 1;
 char block[BLOCKS] = {' ', '#', '%', '*', '&', '+', '@', '[', ']', '~', '-', '='};
 
 void drawBorders(){
-	int a;
+	int i;
 	
 	mvaddch(3, 0, C_BORDER);
 	mvaddch(3, WIDTH + 1, C_BORDER);
 	mvaddch(HEIGHT + 4, 0, C_BORDER);
 	mvaddch(HEIGHT + 4, WIDTH + 1, C_BORDER);
 	
-	for (a = 1; a <= WIDTH; a++){
-		mvaddch(3, a, H_BORDER);
-		mvaddch(HEIGHT + 4, a, H_BORDER);
+	for (i = 1; i <= WIDTH; i++){
+		mvaddch(3, i, H_BORDER);
+		mvaddch(HEIGHT + 4, i, H_BORDER);
 	}
 
-	for (a = 4; a <= HEIGHT + 3; a++){
-		mvaddch(a, 0, V_BORDER);
-		mvaddch(a, WIDTH + 1, V_BORDER);
+	for (i = 4; i <= HEIGHT + 3; i++){
+		mvaddch(i, 0, V_BORDER);
+		mvaddch(i, WIDTH + 1, V_BORDER);
 	}
 }
 
