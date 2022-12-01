@@ -22,6 +22,8 @@
 #define WIDTH 32
 #define HEIGHT 16
 
+#define MEMORY WIDTH + (HEIGHT - 1) * WIDTH
+
 #define BLOCK_UP map[xPos + (yPos - 1) * WIDTH]
 #define BLOCK_DOWN map[xPos + (yPos + 1) * WIDTH]
 #define BLOCK_LEFT map[(xPos - 1) + yPos * WIDTH]
@@ -144,7 +146,7 @@ void placeBlockRight(){
 }
 
 int main(){
-	map = calloc(WIDTH + (HEIGHT - 1) * WIDTH, sizeof (char));
+	map = calloc(MEMORY, sizeof (char));
 
 	initscr();
 	cbreak();
