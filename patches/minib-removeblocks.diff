@@ -15,6 +15,17 @@ more details.
 You should have received a copy of the GNU General Public License along
 with miniblocks. If not, see <https://www.gnu.org/licenses/>.
 
+===========================================================================
+
+NAME: remove blocks
+AUTHOR: Hayden
+DESCRIPTION: A simple patch so that you can remove blocks by using the
+place block keybindings wherever there is already a block, instead of
+having to scroll all the way back and placing an Air block to remove a
+block.
+
+===========================================================================
+
 --- main.c	2022-11-30 21:41:13.235640088 +0000
 +++ main.c	2022-11-30 22:03:00.444350187 +0000
 @@ -27,6 +27,11 @@
