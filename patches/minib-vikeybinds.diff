@@ -1,0 +1,105 @@
+miniblocks Copyright (C) 2022 Hayden
+
+This file is part of miniblocks.
+
+miniblocks is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free
+Software Foundation, either version 3 of the License, or (at your option)
+any later version.
+
+miniblocks is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+more details.
+
+You should have received a copy of the GNU General Public License along
+with miniblocks. If not, see <https://www.gnu.org/licenses/>. 
+
+===========================================================================
+
+NAME: vi keybinds
+AUTHOR: Hayden
+DESCRIPTION: A simple patch to add vi-like keybinds, so HJKL to move,
+instead of the default WASD layout. To place a block, first press I, and
+then the direction you would like to place the block in using the same HJKL
+keys. To switch between blocks, use the Y and U keys. You can also still
+use the arrow keys, but why would you?
+
+===========================================================================
+
+--- main.c	2022-12-01 20:39:15.336988060 +0000
++++ main.c	2022-12-03 21:34:19.013931615 +0000
+@@ -148,6 +148,27 @@ void placeBlockRight(){
+ 	}
+ }
+ 
++void placeBlockInsert(){
++	switch (getch()){
++		case 'k':
++		case KEY_UP:
++			placeBlockUp();
++			break;
++		case 'h':
++		case KEY_DOWN:
++			placeBlockDown();
++			break;
++		case 'j':
++		case KEY_LEFT:
++			placeBlockLeft();
++			break;
++		case 'l':
++		case KEY_RIGHT:
++			placeBlockRight();
++			break;
++	}
++}
++
+ int main(){
+ 	map = calloc(MEMORY, sizeof (char));
+ 
+@@ -170,38 +191,29 @@ int main(){
+ 		move(cursorY, cursorX);
+ 
+ 		switch (getch()){
+-			case 'w':
++			case 'k':
+ 			case KEY_UP:
+ 				movePlayerUp();
+ 				break;
+-			case 'a':
++			case 'h':
+ 			case KEY_LEFT:
+ 				movePlayerLeft();
+ 				break;
+-			case 's':
++			case 'j':
+ 			case KEY_DOWN:
+ 				movePlayerDown();
+ 				break;
+-			case 'd':
++			case 'l':
+ 			case KEY_RIGHT:
+ 				movePlayerRight();
+ 				break;
+ 			case 'i':
+-				placeBlockUp();
+-				break;
+-			case 'j':
+-				placeBlockLeft();
+-				break;
+-			case 'k':
+-				placeBlockDown();
+-				break;
+-			case 'l':
+-				placeBlockRight();
++				placeBlockInsert();
+ 				break;
+-			case '[':
++			case 'y':
+ 				heldBlock = (heldBlock - 1 + BLOCKS) % BLOCKS;
+ 				break;
+-			case ']':
++			case 'u':
+ 				heldBlock = (heldBlock + 1 + BLOCKS) % BLOCKS;
+ 				break;
+ 		}
