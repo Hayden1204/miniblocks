@@ -95,7 +95,7 @@ miniblocks is described as an extremely tiny, maybe even "suckless" game. As suc
 For example, let's apply a very simple patch. The "non-solids" patch enables us to walk through certain blocks, like "doors". I like to think of the blocks `[` and `]` as doors in the game. However, because all blocks are treated as solid blocks, we can't walk through them. To enable us to walk through certain blocks, like the doors, we can apply this patch, like so:
 
 ```sh
-patch < patches/minib-nonsolids.diff
+patch -p1 < patches/minib-nonsolids.diff
 ```
 
 Make sure you apply the patch in the main directory where the `main.c` file is located. This command will fail if you try to apply the patch inside of the `patches` folder. Once patching is complete, recompile the game, and run it. If you've forgotten how to do that, the instructions are back in the **Building** section, just scroll up and follow the commands to compile and run the game. Now, if you place a `[` or `]` block, and try to walk through it, you should be able to.
