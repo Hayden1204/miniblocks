@@ -49,7 +49,8 @@ int xPos = 0;
 char heldBlock = 1;
 char block[BLOCKS] = {' ', '#', '%', '*', '&', '+', '@', '[', ']', '~', '-', '='};
 
-void drawBorders(){
+void drawBorders()
+{
 	int i;
 	
 	mvaddch(3, 0, C_BORDER);
@@ -57,19 +58,20 @@ void drawBorders(){
 	mvaddch(HEIGHT + 4, 0, C_BORDER);
 	mvaddch(HEIGHT + 4, WIDTH + 1, C_BORDER);
 	
-	for (i = 1; i <= WIDTH; i++){
+	for (i = 1; i <= WIDTH; i++) {
 		mvaddch(3, i, H_BORDER);
 		mvaddch(HEIGHT + 4, i, H_BORDER);
 	}
 
-	for (i = 4; i <= HEIGHT + 3; i++){
+	for (i = 4; i <= HEIGHT + 3; i++) {
 		mvaddch(i, 0, V_BORDER);
 		mvaddch(i, WIDTH + 1, V_BORDER);
 	}
 }
 
-void movePlayerUp(){
-	if (yPos > 0 && BLOCK_UP == 0){
+void movePlayerUp()
+{
+	if (yPos > 0 && BLOCK_UP == 0) {
 		getyx(stdscr, cursorY, cursorX);
 		mvaddch(cursorY, cursorX - 1, block[BLOCK_STANDING]);
 		mvaddch(cursorY - 1, cursorX - 1, PLAYER);
@@ -78,8 +80,9 @@ void movePlayerUp(){
 	}
 }
 
-void movePlayerDown(){
-	if (yPos < HEIGHT - 1 && BLOCK_DOWN == 0){
+void movePlayerDown()
+{
+	if (yPos < HEIGHT - 1 && BLOCK_DOWN == 0) {
 		getyx(stdscr, cursorY, cursorX);
 		mvaddch(cursorY, cursorX - 1, block[BLOCK_STANDING]);
 		mvaddch(cursorY + 1, cursorX - 1, PLAYER);
@@ -88,8 +91,9 @@ void movePlayerDown(){
 	}
 }
 
-void movePlayerLeft(){
-	if (xPos > 0 && BLOCK_LEFT == 0){
+void movePlayerLeft()
+{
+	if (xPos > 0 && BLOCK_LEFT == 0) {
 		getyx(stdscr, cursorY, cursorX);
 		mvaddch(cursorY, cursorX - 1, block[BLOCK_STANDING]);
 		mvaddch(cursorY, cursorX - 2, PLAYER);
@@ -98,8 +102,9 @@ void movePlayerLeft(){
 	}
 }
 
-void movePlayerRight(){
-	if (xPos < WIDTH - 1 && BLOCK_RIGHT == 0){
+void movePlayerRight()
+{
+	if (xPos < WIDTH - 1 && BLOCK_RIGHT == 0) {
 		getyx(stdscr, cursorY, cursorX);
 		mvaddch(cursorY, cursorX - 1, block[BLOCK_STANDING]);
 		mvaddch(cursorY, cursorX, PLAYER);
@@ -108,8 +113,9 @@ void movePlayerRight(){
 	}
 }
 
-void placeBlockUp(){
-	if (yPos > 0){
+void placeBlockUp()
+{
+	if (yPos > 0) {
 		getyx(stdscr, cursorY, cursorX);
 		mvaddch(cursorY - 1, cursorX - 1, block[heldBlock]);
 		move(cursorY, cursorX);
@@ -118,8 +124,9 @@ void placeBlockUp(){
 	}
 }
 
-void placeBlockDown(){
-	if (yPos < HEIGHT - 1){
+void placeBlockDown()
+{
+	if (yPos < HEIGHT - 1) {
 		getyx(stdscr, cursorY, cursorX);
 		mvaddch(cursorY + 1, cursorX - 1, block[heldBlock]);
 		move(cursorY, cursorX);
@@ -128,8 +135,9 @@ void placeBlockDown(){
 	}
 }
 
-void placeBlockLeft(){
-	if (xPos > 0){
+void placeBlockLeft()
+{
+	if (xPos > 0) {
 		getyx(stdscr, cursorY, cursorX);
 		mvaddch(cursorY, cursorX - 2, block[heldBlock]);
 		move(cursorY, cursorX);
@@ -138,8 +146,9 @@ void placeBlockLeft(){
 	}
 }
 
-void placeBlockRight(){
-	if (xPos < WIDTH - 1){
+void placeBlockRight()
+{
+	if (xPos < WIDTH - 1) {
 		getyx(stdscr, cursorY, cursorX);
 		mvaddch(cursorY, cursorX, block[heldBlock]);
 		move(cursorY, cursorX);
@@ -162,14 +171,14 @@ int main(){
 	drawBorders();
 	mvaddch(YPOS_SCR, XPOS_SCR, PLAYER);
 
-	while (1){
+	while (1) {
 		getyx(stdscr, cursorY, cursorX);
 		move(1, 0);
 		clrtoeol();
 		mvprintw(1, 0, "X %d|Y %d|BLOCK %c", xPos, yPos, block[heldBlock]);
 		move(cursorY, cursorX);
 
-		switch (getch()){
+		switch (getch()) {
 			case 'w':
 			case KEY_UP:
 				movePlayerUp();
