@@ -24,21 +24,23 @@
 #define WIDTH 64
 #define HEIGHT 24
 
-#define TOP_LEFT_Y 3
-#define TOP_LEFT_X 0
-
-#define MAP_SIZE WIDTH + (HEIGHT - 1) * WIDTH
-
-#define RELATIVE_BLOCK(Y, X) map[(y_pos + Y) * WIDTH + (x_pos + X)]
-#define PLACE_RELATIVE_BLOCK(Y, X) (RELATIVE_BLOCK(Y, X) == 0) ? held_block : 0
-#define BLOCK_AT(Y, X) map[Y * WIDTH + X]
-
 #define C_BORDER '+'
 #define H_BORDER '-'
 #define V_BORDER '|'
 
 #define PLAYER 'X'
 #define BLOCKS 12
+
+#define TOP_LEFT_Y 3
+#define TOP_LEFT_X 0
+/* you can change these. */
+
+#define MAP_SIZE WIDTH + (HEIGHT - 1) * WIDTH
+
+#define RELATIVE_BLOCK(Y, X) map[(y_pos + Y) * WIDTH + (x_pos + X)]
+#define PLACE_RELATIVE_BLOCK(Y, X) (RELATIVE_BLOCK(Y, X) == 0) ? held_block : 0
+#define BLOCK_AT(Y, X) map[Y * WIDTH + X]
+/* don't change these. */
 
 int cursor_y;
 int cursor_x;
