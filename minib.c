@@ -22,7 +22,7 @@
 #include <ncurses.h>
 
 #define WIDTH 64
-#define HEIGHT 16
+#define HEIGHT 24
 
 #define TOP_LEFT_Y 3
 #define TOP_LEFT_X 0
@@ -31,8 +31,9 @@
 
 #define RELATIVE_BLOCK(Y, X) map[(y_pos + Y) * WIDTH + (x_pos + X)]
 #define PLACE_RELATIVE_BLOCK(Y, X) (RELATIVE_BLOCK(Y, X) == 0) ? held_block : 0
+#define BLOCK_AT(Y, X) map[Y * WIDTH + X]
 
-#define C_BORDER '#'
+#define C_BORDER '+'
 #define H_BORDER '-'
 #define V_BORDER '|'
 
@@ -68,10 +69,25 @@ void draw_borders()
 	}
 }
 
+void refresh_map()
+{
+	int i;
+	int j;
+
+	getyx(stdscr, cursor_y, cursor_x);
+
+	for (i = 0; i < HEIGHT; i++) {
+		for (j = 0; j < WIDTH; j++) {
+			mvaddch(i + TOP_LEFT_Y + 1, j + TOP_LEFT_X + 1, block[map[BLOCK_AT(i, j)]]);
+		}
+	}
+
+	move(cursor_y, cursor_x);
+}
+
 void move_player(int relative_block_y, int relative_block_x, int *axis_as_position, bool condition, int position_increment)
 {
 	if (condition && RELATIVE_BLOCK(relative_block_y, relative_block_x) == 0) {
-		getyx(stdscr, cursor_y, cursor_x);
 		mvaddch(cursor_y, cursor_x - 1, block[RELATIVE_BLOCK(0, 0)]);
 		mvaddch(cursor_y + relative_block_y, cursor_x + relative_block_x - 1, PLAYER);
 		
@@ -79,47 +95,14 @@ void move_player(int relative_block_y, int relative_block_x, int *axis_as_positi
 	}
 }
 
-void place_block_up()
+void place_block(int relative_block_y, int relative_block_x, bool condition)
 {
-	if (y_pos > 0) {
+	if (condition) {
 		getyx(stdscr, cursor_y, cursor_x);
-		mvaddch(cursor_y - 1, cursor_x - 1, block[PLACE_RELATIVE_BLOCK(-1, 0)]);
+		mvaddch(cursor_y + relative_block_y, cursor_x + relative_block_x - 1, block[PLACE_RELATIVE_BLOCK(relative_block_y, relative_block_x)]);
 		move(cursor_y, cursor_x);
-
-		RELATIVE_BLOCK(-1, 0) = PLACE_RELATIVE_BLOCK(-1, 0);
-	}
-}
-
-void place_block_down()
-{
-	if (y_pos < HEIGHT - 1) {
-		getyx(stdscr, cursor_y, cursor_x);
-		mvaddch(cursor_y + 1, cursor_x - 1, block[PLACE_RELATIVE_BLOCK(1, 0)]);
-		move(cursor_y, cursor_x);
-
-		RELATIVE_BLOCK(1, 0) = PLACE_RELATIVE_BLOCK(1, 0);
-	}
-}
-
-void place_block_left()
-{
-	if (x_pos > 0) {
-		getyx(stdscr, cursor_y, cursor_x);
-		mvaddch(cursor_y, cursor_x - 2, block[PLACE_RELATIVE_BLOCK(0, -1)]);
-		move(cursor_y, cursor_x);
-
-		RELATIVE_BLOCK(0, -1) = PLACE_RELATIVE_BLOCK(0, -1);
-	}
-}
-
-void place_block_right()
-{
-	if (x_pos < WIDTH - 1) {
-		getyx(stdscr, cursor_y, cursor_x);
-		mvaddch(cursor_y, cursor_x, block[PLACE_RELATIVE_BLOCK(0, 1)]);
-		move(cursor_y, cursor_x);
-
-		RELATIVE_BLOCK(0, 1) = PLACE_RELATIVE_BLOCK(0, 1);
+		
+		RELATIVE_BLOCK(relative_block_y, relative_block_x) = PLACE_RELATIVE_BLOCK(relative_block_y, relative_block_x);
 	}
 }
 
@@ -162,22 +145,25 @@ int main(){
 				move_player(0, 1, &x_pos, x_pos < WIDTH - 1, 1);
 				break;
 			case 'i':
-				place_block_up();
-				break;
-			case 'j':
-				place_block_left();
+				place_block(-1, 0, y_pos > 0);
 				break;
 			case 'k':
-				place_block_down();
+				place_block(1, 0, y_pos < HEIGHT - 1);
+				break;
+			case 'j':
+				place_block(0, -1, x_pos > 0);
 				break;
 			case 'l':
-				place_block_right();
+				place_block(0, 1, x_pos < WIDTH - 1);
 				break;
 			case 'f':
 				held_block = (held_block - 1 + BLOCKS) % BLOCKS;
 				break;
 			case 'h':
 				held_block = (held_block + 1 + BLOCKS) % BLOCKS;
+				break;
+			case ' ':
+				refresh_map();
 				break;
 		}
 	}
