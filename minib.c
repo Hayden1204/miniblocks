@@ -29,7 +29,7 @@
 #define V_BORDER '|'
 
 #define PLAYER 'X'
-#define BLOCKS 12
+#define BLOCKS 15
 
 #define TOP_LEFT_Y 3
 #define TOP_LEFT_X 0
@@ -49,7 +49,7 @@ int y_pos = 0;
 int x_pos = 0;
 uint8_t *map;
 uint8_t held_block = 1;
-char block[BLOCKS] = {' ', '#', '%', '*', '&', '+', '@', '[', ']', '~', '-', '='};
+char block[BLOCKS] = {' ', '#', '%', '*', '&', '$', '@', '+', '[', ']', '~', '-', '=', '_', '!'};
 
 void draw_borders()
 {
